@@ -1,12 +1,13 @@
 #!/usr/bin/bash
 set -e
 
-export USER=django
+export USER={{ cookiecutter.project_slug }}
 export PASS=$USER
 export DB=$USER
 export STORE_DIR=$(realpath $(dirname $(dirname $0)))/dev_db
 
 mkdir -p $STORE_DIR
+echo "Exposing postgres database on psql://$USER:$PASS@localhost:5432/$DB"
 exec docker run \
     -it \
     -e POSTGRES_USER=$USER \

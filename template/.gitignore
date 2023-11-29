@@ -1,8 +1,0 @@
-.idea
-.vscode
-dev_db
-**/__pycache__
-**/node_modules
-
-.env.local
-.env.*.local

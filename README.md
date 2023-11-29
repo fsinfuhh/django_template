@@ -1,4 +1,3 @@
-# Django Template for Mafiasi Backends
+# Cookiecutter for Mafiasi Projects
 
-This repository contains a `templates` directory that can be used to quickly start a new django project which serves the
-role of a backend server for mafiasi applications.
+This repository is a [cookiecutter](https://www.cookiecutter.io/) template to quickly get started in authoring a new mafiasi projcet.

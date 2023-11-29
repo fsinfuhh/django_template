@@ -1,0 +1,6 @@
+{
+  "project_slug": "",
+  "project_name": "{{ cookiecutter.project_slug }}",
+  "author": "Fachschaft Informatik der Universität Hamburg (Mafiasi-AG)",
+  "openid_scope": "openid"
+}
