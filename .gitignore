@@ -1,1 +1,4 @@
 .idea
+
+**/Pipfile.lock
+**/pnpm-lock.yaml
