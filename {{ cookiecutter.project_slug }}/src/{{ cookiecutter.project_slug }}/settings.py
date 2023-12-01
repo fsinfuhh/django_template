@@ -45,6 +45,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 DATABASES = {"default": env.dj_db_url("DJANGO_DB")}
 CACHES = {"default": env.dj_cache_url("DJANGO_CACHE", default="locmem://default")}
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_ALLOWED_CORS_ORIGINS", default=[])
+TRUST_REVERSE_PROXY = env.bool("DJANGO_TRUST_REVERSE_PROXY", default=False)
 
 # openid authentication
 OPENID_CLIENT_ID = env.str("DJANGO_OPENID_CLIENT_ID")
@@ -109,6 +110,19 @@ WSGI_APPLICATION = "{{ cookiecutter.project_slug }}.wsgi.application"
 AUTH_USER_MODEL = "{{ cookiecutter.project_slug }}_core.MafiasiUser"
 LOGIN_REDIRECT_URL = "/"
 OPENID_REDIRECT_URI = None
+
+SILENCED_SYSTEM_CHECKS = [
+    # disable tls related checks because tls stuff is handled externally by our reverse-proxy
+    "security.W004",
+    "security.W008",
+    "security.W012",
+    "security.W016",
+]
+
+if TRUST_REVERSE_PROXY:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    USE_X_FORWARDED_HOST = True
+    USE_X_FORWARDED_PORT= True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

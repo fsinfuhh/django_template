@@ -1,11 +1,16 @@
 .idea
 .vscode
 
+# env files not meant for production
+**/.env.local
+**/.env.dev
+**/.env.dev.local
+
 # Nuxt dev/build outputs
-src/{{ cookiecutter.project_slug }}_gui/*/.output
-src/{{ cookiecutter.project_slug }}_gui/*/.data
-src/{{ cookiecutter.project_slug }}_gui/*/.nuxt
-src/{{ cookiecutter.project_slug }}_gui/*/.nitro
-src/{{ cookiecutter.project_slug }}_gui/*/.cache
-src/{{ cookiecutter.project_slug }}_gui/*/dist
-src/{{ cookiecutter.project_slug }}_gui/*/node_modules
+src/{{ cookiecutter.project_slug }}_gui/.output
+src/{{ cookiecutter.project_slug }}_gui/.data
+src/{{ cookiecutter.project_slug }}_gui/.nuxt
+src/{{ cookiecutter.project_slug }}_gui/.nitro
+src/{{ cookiecutter.project_slug }}_gui/.cache
+src/{{ cookiecutter.project_slug }}_gui/dist
+src/{{ cookiecutter.project_slug }}_gui/node_modules
