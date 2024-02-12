@@ -19,6 +19,8 @@ opentelemetry-exporter-prometheus = "*"                 # translation of telemet
 ipython = "*"
 black = "*"
 isort = "*"
+pytest = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3"

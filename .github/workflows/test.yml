@@ -1,5 +1,6 @@
 name: test
 on:
+  workflow_dispatch:
   push:
     branches: [ "*" ]
 
@@ -31,9 +32,18 @@ jobs:
             !/tmp/github_test_project/**/node_modules
           retention-days: 1
 
-  run-test-project:
+  test-test-project:
     runs-on: ubuntu-latest
     needs: [ create-test-project ]
+    services:
+      db:
+        image: docker.io/postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: github_test_project
+          POSTGRES_PASSWORD: github_test_project
+          POSTGRES_DB: github_test_project
     steps:
       - name: install system dependencies
         run: |
@@ -43,10 +53,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: ${{ env.artifact_name }}
-      - run: ls src/
       - name: install project dependencies
         run: pipenv sync --dev
       - name: manage.py --help
         run: |
           chmod +x ./src/manage.py
           pipenv run ./src/manage.py --help
+      - name: pytest
+        run: pipenv run pytest

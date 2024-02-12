@@ -3,3 +3,12 @@ line-length = 110
 
 [tool.isort]
 profile = "black"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = "src/{{ cookiecutter.project_slug }}/*/tests"
+log_cli = true
+log_cli_level = "info"
+django_find_project = false
+norecursedirs = "dev_db *.egg .* dist node_modules"
+DJANGO_SETTINGS_MODULE = "{{ cookiecutter.project_slug }}.settings"
