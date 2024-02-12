@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("{{ cookiecutter.project_slug }}.api.urls")),
+    path("metrics/", include("{{ cookiecutter.project_slug }}.metrics.urls")),
 ]

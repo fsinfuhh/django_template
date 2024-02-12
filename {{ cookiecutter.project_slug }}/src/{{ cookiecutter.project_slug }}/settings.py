@@ -22,7 +22,9 @@ This is done in the following order of precedence:
 - Read from a .env.$mode.local file (e.g. .env.dev.local or .env.prod.local)
 """
 
+import os
 from pathlib import Path
+from ipaddress import ip_network
 
 from environs import Env
 
@@ -46,6 +48,9 @@ DATABASES = {"default": env.dj_db_url("DJANGO_DB")}
 CACHES = {"default": env.dj_cache_url("DJANGO_CACHE", default="locmem://default")}
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_ALLOWED_CORS_ORIGINS", default=[])
 TRUST_REVERSE_PROXY = env.bool("DJANGO_TRUST_REVERSE_PROXY", default=False)
+ALLOWED_METRICS_NETS = [
+    ip_network(i) for i in env.list("DJANGO_ALLOWED_METRICS_NETS", default=["127.0.0.0/8", "::/64"])
+]
 
 # openid authentication
 OPENID_CLIENT_ID = env.str("DJANGO_OPENID_CLIENT_ID")
@@ -74,6 +79,7 @@ INSTALLED_APPS = [
     "drf_spectacular_sidecar",
     "{{ cookiecutter.project_slug }}.core",
     "{{ cookiecutter.project_slug }}.api",
+    "{{ cookiecutter.project_slug }}.metrics",
 ]
 
 MIDDLEWARE = [
