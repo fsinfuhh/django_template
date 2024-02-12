@@ -1,0 +1,52 @@
+name: test
+on:
+  push:
+    branches: [ "*" ]
+
+env:
+  artifact_name: test_project
+
+jobs:
+  create-test-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install dependencies
+        run: |
+          sudo apt install cookiecutter pre-commit npm
+          pip install pipenv
+          npm install -g pnpm
+      - name: create project with cookiecutter
+        run: |
+          git config --global init.defaultBranch main
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          cookiecutter --no-input --output-dir /tmp ./ project_slug=github_test_project
+      - id: upload-artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.artifact_name }}
+          path: |
+            /tmp/github_test_project
+            !/tmp/github_test_project/**/node_modules
+          retention-days: 1
+
+  run-test-project:
+    runs-on: ubuntu-latest
+    needs: [ create-test-project ]
+    steps:
+      - name: install system dependencies
+        run: |
+          sudo apt install npm
+          pip install pipenv
+          npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.artifact_name }}
+      - run: ls src/
+      - name: install project dependencies
+        run: pipenv sync --dev
+      - name: manage.py --help
+        run: |
+          chmod +x ./src/manage.py
+          pipenv run ./src/manage.py --help

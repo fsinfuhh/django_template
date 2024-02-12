@@ -17,5 +17,5 @@ if __name__ == "__main__":
     # lock & install dependencies
     subprocess.check_call("pipenv lock".split(" "))
     subprocess.check_call("pipenv sync".split(" "))
-    subprocess.check_call("pnpm install".split(" "), cwd="./src/{{ cookiecutter.project_slug }}_gui")
+    subprocess.check_call("pnpm install --no-frozen-lockfile".split(" "), cwd="./src/{{ cookiecutter.project_slug }}_gui")
     git_commit("lock dependencies")
