@@ -4,7 +4,7 @@ from opentelemetry import metrics
 # For a detailed description, see the OpenTelemetry docs:
 #    https://opentelemetry.io/docs/languages/python/instrumentation/#creating-and-using-asynchronous-instruments
 
-vinywaji_meter = metrics.get_meter("{{ cookiecutter.project_slug }}")
+{{ cookiecutter.project_slug }}_meter = metrics.get_meter("{{ cookiecutter.project_slug }}")
 
 
 def create_async_instruments():
