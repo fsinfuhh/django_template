@@ -27,6 +27,6 @@ class PrometheusMetricsView(View):
         if not self.is_allowed(request):
             return HttpResponse(status=HTTPStatus.FORBIDDEN)
 
-        encode, content_type = prometheus_client.exposition.choose_encoder(request.META["HTTP_ACCEPT"])
+        encode, content_type = prometheus_client.exposition.choose_encoder(request.META.get("HTTP_ACCEPT"))
         content = encode(REGISTRY)
         return HttpResponse(status=HTTPStatus.OK, content=content, content_type=content_type)
