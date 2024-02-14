@@ -62,7 +62,6 @@ OPENID_ANY_USER_IS_ADMIN = env.bool("DJANGO_ANY_OPENID_USER_IS_ADMIN", default=F
 OPENID_SUPERUSER_GROUPS = env.list("DJANGO_OPENID_SUPERUSER_GROUPS", default=[])
 
 
-
 # static django config
 
 INSTALLED_APPS = [
@@ -114,8 +113,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "{{ cookiecutter.project_slug }}.wsgi.application"
 
 AUTH_USER_MODEL = "{{ cookiecutter.project_slug }}_core.MafiasiUser"
-LOGIN_REDIRECT_URL = "/"
-OPENID_REDIRECT_URI = None
 
 SILENCED_SYSTEM_CHECKS = [
     # disable tls related checks because tls stuff is handled externally by our reverse-proxy

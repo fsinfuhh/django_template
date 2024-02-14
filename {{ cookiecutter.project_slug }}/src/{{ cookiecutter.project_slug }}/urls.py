@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path("admin/openid-auth/", include("simple_openid_connect.integrations.django.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("{{ cookiecutter.project_slug }}.api.urls")),
     path("metrics/", include("{{ cookiecutter.project_slug }}.metrics.urls")),
