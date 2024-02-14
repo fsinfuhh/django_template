@@ -2,5 +2,9 @@
   "project_name": "",
   "project_slug": "{{ cookiecutter.project_name | slugify(separator='_') }}",
   "author": "Fachschaft Informatik der Universität Hamburg (Mafiasi-AG)",
-  "openid_scope": "openid"
+  "openid_scope": "openid",
+  
+  "_copy_without_render": [
+    "src/{{ cookiecutter.project_slug }}/*/templates/*"
+  ]
 }
