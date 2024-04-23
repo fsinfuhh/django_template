@@ -11,19 +11,19 @@ services:
   backend:
     build:
       context: ./
-      dockerfile: ./docker/backend/Dockerfile
+      dockerfile: ./docker/dev/backend/Dockerfile
     volumes:
       - ./:/app/backend
     depends_on:
       - database
 
   frontend:
-    build: docker/frontend
+    build: docker/dev/frontend
     volumes:
       - ./src/{{ cookiecutter.project_slug }}_gui:/app/frontend
 
   webserver:
-    build: docker/webserver
+    build: docker/dev/webserver
     depends_on:
       - backend
       - frontend

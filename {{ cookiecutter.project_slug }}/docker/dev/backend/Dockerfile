@@ -12,10 +12,10 @@ RUN pip3 install pipenv==v2022.4.20
 
 RUN usermod -u 2009 -g 33 -d /app/backend www-data
 
-ADD ./docker/backend/env.dev.local /app/config/.env.dev.local
+ADD ./docker/dev/backend/env.dev.local /app/config/.env.dev.local
 
 EXPOSE 8000
 
 #USER www-data:www-data
-ADD ./docker/backend/start.sh /usr/local/bin/start.sh
+ADD ./docker/dev/backend/start.sh /usr/local/bin/start.sh
 CMD ["bash", "/usr/local/bin/start.sh"]

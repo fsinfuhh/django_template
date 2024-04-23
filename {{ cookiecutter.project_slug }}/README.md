@@ -28,3 +28,15 @@ The following variables are defined:
 | `NUXT_PUBLIC_OPENID_ISSUER`       | *mafiasi-identity*                |    no     | The openid issuer which the frontend uses for authentication (should be the same as the one in configured for django) |
   
 For the configuration of these variables in `dev` mode, see the configuration in [.env.dev](./.env.dev).
+
+## Docker Setup
+
+This project contains two different docker setup. One is for production, one for development.
+
+### Production Setup
+
+The Docker Setup for production consists of the `Dockerfile` in the root of this project. The required assets are in the `/docker/prod` directory.
+
+### Development Setup
+
+The Docker Setup for development is based on the `compose.yaml` in the root of this project. All Dockerfiles and other files required for this are in the `/docker/dev` directory.

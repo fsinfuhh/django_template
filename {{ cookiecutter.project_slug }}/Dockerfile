@@ -22,8 +22,8 @@ FROM docker.io/debian:bookworm as final
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends nodejs python3 python-is-python3 pipenv nginx gunicorn xz-utils supervisor
-COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
-COPY docker/start_backend.sh docker/start_frontend.sh docker/start_nginx.sh /usr/local/bin/
+COPY docker/prod/supervisord.conf /etc/supervisor/supervisord.conf
+COPY docker/prod/start_backend.sh docker/prod/start_frontend.sh docker/prod/start_nginx.sh /usr/local/bin/
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 # install django server
@@ -32,7 +32,7 @@ ADD Pipfile Pipfile.lock ./
 RUN pipenv install --system --deploy
 ADD LICENSE README.md ./
 ADD src/ ./src/
-ADD docker/nginx.conf /etc/nginx/sites-enabled/default
+ADD docker/prod/nginx.conf /etc/nginx/sites-enabled/default
 
 # add built frontend sources
 COPY --from=gui_build /usr/local/src/{{ cookiecutter.project_slug }}_gui/.output ./src/{{ cookiecutter.project_slug }}_gui/dist/
