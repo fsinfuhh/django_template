@@ -1,0 +1,33 @@
+services:  
+  database:
+    image: postgres
+    volumes:
+      - ./dev_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER={{ cookiecutter.project_slug }}
+      - POSTGRES_PASSWORD={{ cookiecutter.project_slug }}
+      - POSTGRES_DB={{ cookiecutter.project_slug }}
+
+  backend:
+    build:
+      context: ./
+      dockerfile: ./docker/dev/backend/Dockerfile
+    volumes:
+      - ./:/app/backend
+    depends_on:
+      - database
+
+  frontend:
+    build: docker/dev/frontend
+    volumes:
+      - ./src/{{ cookiecutter.project_slug }}_gui:/app/frontend
+
+  webserver:
+    build: docker/dev/webserver
+    depends_on:
+      - backend
+      - frontend
+      - database
+    ports:
+      - 8000:8000
+      - 3000:3000
