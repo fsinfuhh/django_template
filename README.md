@@ -8,7 +8,12 @@ This repository is a [cookiecutter](https://www.cookiecutter.io/) template to qu
 
    See the official [cookiecutter installation instructions](https://cookiecutter.readthedocs.io/en/2.0.2/installation.html) for more details.
 
-2. Create a new project based on this template by running and responding to all the questions.
+2. Install `pre-commit` e.g. via:
+   ```shell
+   pip install pre-commit
+   ```
+
+4. Create a new project based on this template by running and responding to all the questions.
 
    ```shell
    cookiecutter https://github.com/fsinfuhh/template
